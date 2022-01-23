@@ -5,7 +5,7 @@
     <title>New Tab</title>
     <style>
         :root {
-            --anim-list: opacity 0.1s;
+            --anim-list: opacity 0.18s;
         }
 
         * {
@@ -31,11 +31,11 @@
             background-size: cover;
             background-position: center;
             overflow-x: hidden;
-            padding-top: calc(50vh - 49px);
+            margin-top: calc(50vh - 49px);
         }
 
         #qBox {
-            color: #bbb;
+            color: #d8d8d8;
             background: #222;
             padding: 9px;
             font-size: 18px;
@@ -49,22 +49,19 @@
 
         #enginePick {
             cursor: default;
-            white-space: nowrap;
             margin: 0 auto;
-            display: flexbox;
             width: 600px;
             max-width: 80%;
         }
 
         #enginePick * {
-            flex-wrap: wrap;
-            opacity: 0.7;
+            float: left;
+            opacity: 0.72;
             cursor: pointer;
-            background: none;
             background-size: 100%;
             width: 40px;
             height: 40px;
-            margin: 9px;
+            padding: 9px;
         }
 
         #enginePick *:hover {
@@ -87,8 +84,8 @@
             }
         }
         function search(prefix) {
-            let search = "https://" + prefix + "?q=" + document.getElementById('qBox').value.replace(" ", "+");
-            document.getElementById('qBox').value = "";
+            let search = "https://" + prefix + "?q=" + qBox.value.replace(" ", "+");
+            qBox.value = "";
             window.open(search, "_self");
         }
     </script>
@@ -98,12 +95,11 @@
 <body id="main" onload="setup()">
     <input type="text" id="qBox" title="Search" />
     <div id="enginePick">
-        <!-- DuckDuckGo -->
-        <img src="duckduckgo.svg" title="DuckDuckGo"
-            onclick="search('duckduckgo.com/')" />
-        <img src="ecosia.svg" title="Ecosia" onclick="search('ecosia.com/search')" />
-        <img src="google.svg" title="Google" onclick="search('google.com/search')" />
-        <img src="bing.svg" title="Bing" onclick="search('bing.com/search')" />
+        <!-- DuckDuckGo --><img src="duckduckgo.svg" title="DuckDuckGo" onclick="search('duckduckgo.com/')" />
+        <!-- Ecosia --><img src="ecosia.svg" title="Ecosia" onclick="search('ecosia.com/search')" />
+        <!-- Brave --><img src="brave.svg" title="Brave" onclick="search('search.brave.com/search')" />
+        <!-- Bing --><img src="bing.svg" title="Bing" onclick="search('bing.com/search')" />
+        <!-- Google --><img src="google.svg" title="Google" onclick="search('google.com/search')" />
     </div>
 </body>
 

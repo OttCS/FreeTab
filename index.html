@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" onload="document.getElementById('qBox').focus()">
+
+<head>
+    <title>New Tab</title>
+    <style>
+        :root {
+            --anim-list: opacity 0.1s;
+        }
+
+        * {
+            color: #eee;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            outline: none;
+            border: none;
+            -webkit-transition: var(--anim-list);
+            -moz-transition: var(--anim-list);
+            -o-transition: var(--anim-list);
+            transition: var(--anim-list);
+            transition-timing-function: ease-out;
+        }
+
+        html {
+            background-color: #000;
+        }
+
+        #main {
+            width: 100vw;
+            background-size: cover;
+            background-position: center;
+            overflow-x: hidden;
+            padding-top: calc(50vh - 49px);
+        }
+
+        #qBox {
+            color: #bbb;
+            background: #222;
+            padding: 9px;
+            font-size: 18px;
+            line-height: 22px;
+            height: 22px;
+            width: 582px;
+            max-width: calc(80% - 18px);
+            display: block;
+            margin: 0 auto 9px;
+        }
+
+        #enginePick {
+            cursor: default;
+            white-space: nowrap;
+            margin: 0 auto;
+            display: flexbox;
+            width: 600px;
+            max-width: 80%;
+        }
+
+        #enginePick * {
+            flex-wrap: wrap;
+            opacity: 0.7;
+            cursor: pointer;
+            background: none;
+            background-size: 100%;
+            width: 40px;
+            height: 40px;
+            margin: 9px;
+        }
+
+        #enginePick *:hover {
+            opacity: 1.0;
+        }
+    </style>
+
+    <script>
+        var qBox;
+        function setup() {
+            qBox = document.getElementById('qBox');
+            qBox.focus();
+        }
+        document.onkeydown = function (e) {
+            let k = e.key;
+            if (k.toLowerCase() == "enter") {
+                search("duckduckgo.com/");
+            } else if (qBox != document.activeElement) {
+                qBox.focus();
+            }
+        }
+        function search(prefix) {
+            let search = "https://" + prefix + "?q=" + document.getElementById('qBox').value.replace(" ", "+");
+            document.getElementById('qBox').value = "";
+            window.open(search, "_self");
+        }
+    </script>
+
+</head>
+
+<body id="main" onload="setup()">
+    <input type="text" id="qBox" title="Search" />
+    <div id="enginePick">
+        <!-- DuckDuckGo -->
+        <img src="duckduckgo.svg" title="DuckDuckGo"
+            onclick="search('duckduckgo.com/')" />
+        <img src="ecosia.svg" title="Ecosia" onclick="search('ecosia.com/search')" />
+        <img src="google.svg" title="Google" onclick="search('google.com/search')" />
+        <img src="bing.svg" title="Bing" onclick="search('bing.com/search')" />
+    </div>
+</body>
+
+</html>

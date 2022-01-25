@@ -36,7 +36,7 @@
 
         #qBox {
             color: #d8d8d8;
-            background: #222;
+            background-color: #222;
             padding: 9px;
             font-size: 18px;
             line-height: 22px;
@@ -47,34 +47,80 @@
             margin: 0 auto 9px;
         }
 
-        #enginePick {
-            cursor: default;
+        #secondary {
+            display: block;
             margin: 0 auto;
             width: 600px;
             max-width: 80%;
         }
 
-        #enginePick * {
-            float: left;
-            opacity: 0.72;
-            cursor: pointer;
-            background-size: 100%;
+        #secondary div {
+            display: block;
+            width: 100%;
+        }
+
+        #secondary div * {
+            line-height: 58px;
             width: 40px;
             height: 40px;
             padding: 9px;
         }
 
-        #enginePick *:hover {
+        #enginePick * {
+            float: left;
+            width: 40px;
+            height: 40px;
+            padding: 9px;
+        }
+
+        .clickable {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+        .clickable:hover {
             opacity: 1.0;
+        }
+
+        img {
+            display: none;
         }
     </style>
 
     <script>
         var qBox;
+
         function setup() {
             qBox = document.getElementById('qBox');
             qBox.focus();
+            addEngines();
         }
+
+        function addEngines() {
+            var engines = [
+                { name: "DuckDuckGo", img: "duckduckgo.svg", address: "duckduckgo.com/" },
+                { name: "Ecosia", img: "ecosia.svg", address: "ecosia.org/search" },
+                { name: "Brave", img: "brave.svg", address: "search.brave.com/search" },
+                { name: "Bing", img: "bing.svg", address: "bing.com/search" },
+                { name: "Google", img: "google.svg", address: "google.com/search" },
+            ];
+            var home = document.getElementById("engines");
+            for (var i = 0; i < engines.length; i++) {
+                let item = engines[i];
+                var build = document.createElement('img');
+                build.src = item.img;
+                build.title = "Search with " + item.name;
+                build.onload = function (evt) {
+                    evt.currentTarget.style.display = 'inline-block'
+                };
+                build.onclick = function(evt) {
+                    search(item.address);
+                }
+                build.classList.add('clickable');
+                home.appendChild(build);
+            }
+        }
+
         document.onkeydown = function (e) {
             let k = e.key;
             if (k.toLowerCase() == "enter") {
@@ -83,10 +129,12 @@
                 qBox.focus();
             }
         }
+
         function search(prefix) {
             let search = "https://" + prefix + "?q=" + qBox.value.replace(" ", "+");
             qBox.value = "";
-            window.open(search, "_self");
+            qBox.focus();
+            window.open(search);
         }
     </script>
 
@@ -94,12 +142,8 @@
 
 <body id="main" onload="setup()">
     <input type="text" id="qBox" title="Search" />
-    <div id="enginePick">
-        <!-- DuckDuckGo --><img src="duckduckgo.svg" title="DuckDuckGo" onclick="search('duckduckgo.com/')" />
-        <!-- Ecosia --><img src="ecosia.svg" title="Ecosia" onclick="search('ecosia.com/search')" />
-        <!-- Brave --><img src="brave.svg" title="Brave" onclick="search('search.brave.com/search')" />
-        <!-- Bing --><img src="bing.svg" title="Bing" onclick="search('bing.com/search')" />
-        <!-- Google --><img src="google.svg" title="Google" onclick="search('google.com/search')" />
+    <div id="secondary">
+        <div id="engines"></div>
     </div>
 </body>
 

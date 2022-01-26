@@ -6,6 +6,8 @@
     <style>
         :root {
             --anim-list: opacity 0.18s;
+            --main-page: #000;
+            --icon-size: 40px;
         }
 
         * {
@@ -23,7 +25,7 @@
         }
 
         html {
-            background-color: #000;
+            background-color: var(--main-page);
         }
 
         #main {
@@ -35,6 +37,8 @@
         }
 
         #qBox {
+            display: flex;
+            flex-direction: row;
             color: #d8d8d8;
             background-color: #222;
             padding: 9px;
@@ -48,38 +52,41 @@
         }
 
         #secondary {
-            display: block;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
             margin: 0 auto;
             width: 600px;
             max-width: 80%;
         }
 
-        #secondary div {
-            display: block;
+        #secondary .row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
             width: 100%;
         }
 
-        #secondary div * {
-            line-height: 58px;
-            width: 40px;
-            height: 40px;
-            padding: 9px;
+        div.ico:hover {
+            opacity: 1.0;
         }
 
-        #enginePick * {
-            float: left;
-            width: 40px;
-            height: 40px;
-            padding: 9px;
-        }
-
-        .clickable {
+        div.ico {
+            border-radius: 10%;
+            font-size: 28px;
+            line-height: var(--icon-size);
+            text-align: center;
+            flex-direction: row;
+            min-width: var(--icon-size);
+            min-height: var(--icon-size);
+            width: var(--icon-size);
+            height: var(--icon-size);
+            margin: 9px;
+            background-position: center;
+            background-size: auto var(--icon-size);
+            background-repeat: no-repeat;
             opacity: 0.7;
             cursor: pointer;
-        }
-
-        .clickable:hover {
-            opacity: 1.0;
         }
 
         img {
@@ -88,38 +95,134 @@
     </style>
 
     <script>
+        window.oncontextmenu = function (e) {
+            e.preventDefault();
+        }
         var qBox;
+        var stored;
+        var add = document.createElement('div');
+        add.classList.add("ico");
+        add.id = "add";
+        add.style = "background-image:url('add.svg');"
+        add.onclick = function () { createNewStored() };
 
         function setup() {
             qBox = document.getElementById('qBox');
             qBox.focus();
             addEngines();
+            addStored();
         }
 
         function addEngines() {
-            var engines = [
+            let engines = [
                 { name: "DuckDuckGo", img: "duckduckgo.svg", address: "duckduckgo.com/?q=" },
                 { name: "Ecosia", img: "ecosia.svg", address: "ecosia.org/search?q=" },
                 { name: "Brave", img: "brave.svg", address: "search.brave.com/search?q=" },
                 { name: "Bing", img: "bing.svg", address: "bing.com/search?q=" },
-                { name: "Google", img: "google.svg", address: "google.com/search?q=" },
-                {name: "YouTube", img: "youtube.svg", address: "www.youtube.com/results?search_query="}
+                { name: "Google", img: "google.svg", address: "google.com/search?q=" }
             ];
-            var home = document.getElementById("engines");
+            let home = document.getElementById("engines");
             for (var i = 0; i < engines.length; i++) {
                 let item = engines[i];
-                var build = document.createElement('img');
-                build.src = item.img;
+                let build = document.createElement('div');
+                build.classList.add("ico");
+                if (item.img != "") {
+                    build.style.backgroundImage = "url(" + item.img + ")";
+                }
                 build.title = "Search with " + item.name;
                 build.onload = function (evt) {
                     evt.currentTarget.style.display = 'inline-block'
                 };
-                build.onclick = function(evt) {
+                build.onclick = function (evt) {
                     search(item.address);
                 }
                 build.classList.add('clickable');
                 home.appendChild(build);
             }
+        }
+
+        function randColor(str) {
+            let seed = parseInt(str.replace(/[^a-zA-Z]+/g, ""), 36) % 240;
+            let val = [seed * 37 % 160 + 80, seed * 121 % 240, seed * 317 % 160];
+            return "rgb(" + val[seed % 3] + "," + val[(seed + 1) % 3] + "," + val[(seed + 2) % 3] + ")";
+        }
+
+        function createNewStored() {
+            let address = prompt("URL");
+            if (address == null) return;
+            let name = prompt("Bookmark Name");
+            if (name == null) return;
+            let img = prompt("Image (Optional, leave blank for random color or type a color in the format ottcs@rgb(r,g,b))");
+            if (img == null) return;
+            let storedArray = JSON.parse(localStorage.getItem("storedArrayJSON"));
+            if (img == "") img = "ottcs@" + randColor(address);
+            storedArray.push({ name: name, img: img, address: address });
+            localStorage.setItem("storedArrayJSON", JSON.stringify(storedArray));
+            addStored();
+        }
+
+        function addStored() {
+            let home = document.getElementById("stored");
+            home.textContent = '';
+            home.appendChild(add);
+            if (localStorage.getItem("storedArrayJSON") == null) {
+                localStorage.clear();
+                localStorage.setItem("storedArrayJSON", JSON.stringify([]));
+            }
+            let storedArray = JSON.parse(localStorage.getItem("storedArrayJSON"));
+            for (var i = 0; i < storedArray.length; i++) {
+                let item = storedArray[i];
+                let build = document.createElement('div');
+                build.classList.add("ico");
+                if (item.img.match(/\.(jpeg|jpg|gif|png|svg|ico)$/) != null) {
+                    build.style.backgroundImage = "url(" + item.img + ")";
+                } else {
+                    build.style.backgroundColor = randColor(item.address);
+                    build.innerText = item.name[0];
+                }
+                build.style.backgroundColor = randColor(item.address);
+                build.title = item.name;
+                build.onmousedown = function (evt) {
+                    evt = evt || window.event;
+                    if (evt.button < 2) {
+                        launch(item.address);
+                    } else {
+                        storedClick(item);
+                    }
+                }
+                build.classList.add('clickable');
+                home.insertBefore(build, add);
+            }
+        }
+
+        function storedClick(evt) {
+
+            let r = prompt("Actions: (delete, copy)");
+            if (r == null) return;
+            switch (r.toLowerCase()) {
+                case "delete":
+                    removeStored(evt);
+                    break;
+                case "copy":
+                    navigator.clipboard.writeText(evt.address);
+                    break;
+            }
+
+        }
+
+        function removeStored(ref) {
+            let storedArray = JSON.parse(localStorage.getItem("storedArrayJSON"));
+
+            let i = 0;
+            let found = false;
+            while (i < storedArray.length && !found) {
+                let it = storedArray[i];
+                found = (ref.name == it.name && ref.address == it.address && ref.img == it.img);
+                i++;
+            }
+            storedArray.splice(i - 1, i);
+            localStorage.setItem("storedArrayJSON", JSON.stringify(storedArray));
+            addStored();
         }
 
         document.onkeydown = function (e) {
@@ -132,10 +235,14 @@
         }
 
         function search(prefix) {
-            let search = "https://" + prefix + qBox.value.replace(" ", "+").replace("'", "%27");
+            let search = "https://" + prefix + qBox.value.replace(" ", "%20").replace("'", "%27");
             qBox.value = "";
             qBox.focus();
-            window.open(search);
+            launch(search);
+        }
+
+        function launch(url) {
+            window.open(url, "_blank");
         }
     </script>
 
@@ -144,7 +251,10 @@
 <body id="main" onload="setup()">
     <input type="text" id="qBox" title="Search" />
     <div id="secondary">
-        <div id="engines"></div>
+        <div id="engines" class="row"></div>
+        <div id="stored" class="row">
+            <div class="ico" id="add" style="background-image:url('add.svg');" onclick="createNewStored()" />
+        </div>
     </div>
 </body>
 

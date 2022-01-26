@@ -7,7 +7,9 @@
         :root {
             --anim-list: opacity 0.18s;
             --main-page: #000;
-            --icon-size: 40px;
+            --icon-size: 42px;
+            --margin-size: 6px;
+            --visual-width: calc(12 * (var(--icon-size) + var(--margin-size) * 2));
         }
 
         * {
@@ -33,7 +35,7 @@
             background-size: cover;
             background-position: center;
             overflow-x: hidden;
-            margin-top: calc(50vh - 49px);
+            margin-top: calc(50vh - var(--icon-size) - var(--margin-size));
         }
 
         #qBox {
@@ -41,23 +43,24 @@
             flex-direction: row;
             color: #d8d8d8;
             background-color: #222;
-            padding: 9px;
-            font-size: 18px;
-            line-height: 22px;
-            height: 22px;
-            width: 582px;
-            max-width: calc(80% - 18px);
+            padding: var(--margin-size);
+            font-size: calc(var(--icon-size) * 0.5);
+            line-height: calc(var(--icon-size) - 2 * var(--margin-size));
+            height: calc(var(--icon-size) - 2 * var(--margin-size));
+            width: calc(var(--visual-width) - var(--margin-size) * 2);
+            max-width: calc(100% - 134px);
             display: block;
-            margin: 0 auto 9px;
+            margin: 0 auto var(--margin-size);
         }
 
         #secondary {
+            background-color: #444;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             margin: 0 auto;
-            width: 600px;
-            max-width: 80%;
+            width: var(--visual-width);
+            max-width: calc(100% - 116px);
         }
 
         #secondary .row {
@@ -81,7 +84,8 @@
             min-height: var(--icon-size);
             width: var(--icon-size);
             height: var(--icon-size);
-            margin: 9px;
+            /* padding: 4.5px; */
+            margin: var(--margin-size);
             background-position: center;
             background-size: auto var(--icon-size);
             background-repeat: no-repeat;
@@ -142,7 +146,7 @@
         }
 
         function randColor(str) {
-            let seed = parseInt(str.replace(/[^a-zA-Z]+/g, ""), 36) % 240;
+            let seed = parseInt(str.replace(/[^a-zA-Z]+/g, ""), 36) * 29 % 240;
             let val = [seed * 37 % 160 + 80, seed * 121 % 240, seed * 317 % 160];
             return "rgb(" + val[seed % 3] + "," + val[(seed + 1) % 3] + "," + val[(seed + 2) % 3] + ")";
         }
@@ -155,7 +159,6 @@
             let img = prompt("Image (Optional, leave blank for random color or type a color in the format ottcs@rgb(r,g,b))");
             if (img == null) return;
             let storedArray = JSON.parse(localStorage.getItem("storedArrayJSON"));
-            if (img == "") img = "ottcs@" + randColor(address);
             storedArray.push({ name: name, img: img, address: address });
             localStorage.setItem("storedArrayJSON", JSON.stringify(storedArray));
             addStored();
@@ -176,11 +179,11 @@
                 build.classList.add("ico");
                 if (item.img.match(/\.(jpeg|jpg|gif|png|svg|ico)$/) != null) {
                     build.style.backgroundImage = "url(" + item.img + ")";
+                    build.style.backgroundColor = "#fff";
                 } else {
                     build.style.backgroundColor = randColor(item.address);
                     build.innerText = item.name[0];
                 }
-                build.style.backgroundColor = randColor(item.address);
                 build.title = item.name;
                 build.onmousedown = function (evt) {
                     evt = evt || window.event;

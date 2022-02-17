@@ -147,7 +147,7 @@
         function randColor(str) {
             let seed = parseInt(str.replace(/[^a-zA-Z]+/g, ""), 36) % 1234567;
             let val = [seed * 3 % 160 + 96, seed * 13 % 256, seed * 23 % 160];
-            return "rgb(" + val[1] + "," + val[2] + "," + val[0] + ")";
+            return "rgb(" + val[2] + "," + val[1] + "," + val[0] + ")";
         }
 
         function createNewStored() {

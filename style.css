@@ -1,0 +1,93 @@
+:root {
+    --anim-list: opacity 0.2s, border 0.2s;
+    --icon-size: 42px;
+    --margin-size: 8px;
+    --visual-width: calc(12 * (var(--icon-size) + var(--margin-size) * 2));
+}
+
+* {
+    color: #eee;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    -webkit-transition: var(--anim-list);
+    -moz-transition: var(--anim-list);
+    -o-transition: var(--anim-list);
+    transition: var(--anim-list);
+    transition-timing-function: ease-out;
+}
+
+#main {
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    overflow-x: hidden;
+    margin-top: calc(50vh - 1.5 * var(--icon-size) - 2 * var(--margin-size));
+}
+
+#qBox {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    background: none;
+    padding: calc(2 * var(--margin-size));
+    font-size: calc(var(--icon-size) * 0.5);
+    line-height: calc(var(--icon-size) - var(--margin-size));
+    height: calc(var(--icon-size) - 4 * var(--margin-size));
+    width: calc(var(--visual-width) - var(--margin-size) * 2);
+    max-width: calc(100% - 134px);
+    display: block;
+    margin: 0 auto var(--margin-size);
+    border: 2px solid #333;
+    border-radius: var(--icon-size);
+    text-align: left;
+}
+
+#qBox:focus {
+    border: 2px solid #888;
+}
+
+#secondary {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: var(--visual-width);
+    max-width: calc(100% - 116px);
+}
+
+#secondary .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+div.ico:hover {
+    opacity: 1.0;
+}
+
+div.ico {
+    border-radius: 10%;
+    font-size: calc(var(--icon-size) - 2 *var(--margin-size));
+    line-height: var(--icon-size);
+    text-align: center;
+    flex-direction: row;
+    min-width: var(--icon-size);
+    min-height: var(--icon-size);
+    width: var(--icon-size);
+    height: var(--icon-size);
+    /* padding: 4.5px; */
+    margin: var(--margin-size);
+    background-position: center;
+    background-size: auto var(--icon-size);
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+img {
+    display: none;
+}

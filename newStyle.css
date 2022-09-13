@@ -1,0 +1,53 @@
+:root {
+    --anim-list: opacity 0.2s border-color 0.2s;
+    --scale: 50px;
+    --visual-width: calc(12 * (var(--icon-size) + var(--margin-size) * 2));
+}
+
+* {
+    -webkit-transition: var(--anim-list);
+    -moz-transition: var(--anim-list);
+    -o-transition: var(--anim-list);
+    transition: var(--anim-list);
+    transition-timing-function: ease-out;
+    outline: none;
+    border: none;
+    border-radius: calc(.5 * var(--scale));
+    margin: 0;
+    padding: 0;
+    font-size: calc(.5 * var(--scale));
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#search {
+    display: block;
+    margin: calc(50vh - 225px) calc(50vw - 400px);
+    padding: 50px;
+    height: 350px;
+    width: 700px;
+    max-width: 1200px;
+    border: 2px solid #333;
+}
+
+#qBox {
+    outline: none;
+    display: block;
+    margin: auto;
+    border: 2px solid #333;
+    background: none;
+    width: 50%;
+    line-height: var(--scale);
+    text-align: center;
+    color: #888;
+}
+
+#qBox:focus {
+    border-color: #888;
+}

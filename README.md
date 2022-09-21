@@ -1,4 +1,4 @@
-FreeTab: A replacement for your browser's cluttered and invasive new-tab page. Fast, freeing, and free.
+OpenTab: A replacement for your browser's cluttered and invasive new-tab page. Fast, freeing, and free.
 ----------------------------
 Just a side project of mine, just an example of what browsers should strive for on a new tab.
 

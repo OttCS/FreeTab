@@ -37,7 +37,7 @@ if (bg = urlParam.get("bg")) {
 
 if (ui = urlParam.get("ui")) {
     if (ui.indexOf("0x") == 0) ui = "#" + ui.substring(2);
-    root.style.setProperty('--ui', ui);
+    document.documentElement.style.setProperty('--ui', ui);
 }
 
 const search = (sAddress) => {

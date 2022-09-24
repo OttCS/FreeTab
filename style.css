@@ -96,7 +96,6 @@ body {
 }
 
 #settings {
-    opacity: 0;
     width: calc(80vw - 24px);
     max-width: 516px;
     padding: 0px 12px;

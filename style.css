@@ -1,11 +1,13 @@
 :root {
     --anim-list: opacity 0.2s, border 0.2s, color 0.2s, fill 0.2s;
     --size: 6px;
+    --rnd: 24px;
+    --bg: #111;
+    --ui: #bbb;
     --unfocus: 0.5;
 }
 
 * {
-    color: #eee;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -19,6 +21,7 @@
 }
 
 body {
+    background: var(--bg);
     display: block;
     margin: 0 auto;
     width: 80vw;
@@ -43,14 +46,14 @@ body {
     display: block;
     width: calc(100% - 28px);
     font-size: 18px;
-    color: #fff;
+    color: var(--ui);
     background: none;
     padding: 6px 12px;
     height: 24px;
-    border-radius: 24px;
+    border-radius: var(--rnd);
     line-height: 24px;
-    border: 2px solid #888;
-    color: #888;
+    border: 2px solid var(--ui);
+    color: var(--ui);
     text-align: left;
     opacity: var(--unfocus);
 }
@@ -81,7 +84,7 @@ body {
 
 #cog {
     cursor: pointer;
-    fill: #888;
+    fill: var(--ui);
     position: absolute;
     top: 12px;
     right: 12px;
@@ -90,4 +93,19 @@ body {
 
 #cog:hover {
     opacity: 1.0;
+}
+
+#settings {
+    opacity: 0;
+    width: calc(80vw - 24px);
+    max-width: 516px;
+    padding: 0px 12px;
+    display: block;
+    position: fixed;
+    top: 0;
+    background: red;
+    color: var(--ui);
+    border: 2px solid var(--ui);
+    background: var(--bg);
+    border-radius: var(--rnd);
 }

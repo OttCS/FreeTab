@@ -28,22 +28,16 @@ const cog = document.getElementById("cog");
 const urlParam = new URLSearchParams(window.location.search);
 if (bg = urlParam.get("bg")) {
     if (bg.indexOf("://") != -1) {
-        document.documentElement.style.background = "url(" + bg + ")";
-        document.documentElement.style.backgroundSize = "cover";
-        document.documentElement.style.backgroundPosition = "center";
-        document.documentElement.style.backgrundRepeat = "no-repeat";
-
+        bg = "url(" + bg + ")";
     } else {
         if (bg.indexOf("0x") == 0) bg = "#" + bg.substring(2);
-        document.documentElement.style.background = bg;
     }
+    document.documentElement.style.setProperty('--bg', bg);
 }
 
 if (ui = urlParam.get("ui")) {
     if (ui.indexOf("0x") == 0) ui = "#" + ui.substring(2);
-    cog.style.fill = ui;
-    qBox.style.borderColor = ui;
-    qBox.style.color = ui;
+    root.style.setProperty('--ui', ui);
 }
 
 const search = (sAddress) => {

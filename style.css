@@ -1,8 +1,7 @@
 :root {
-    --anim-list: opacity 0.2s, border 0.2s;
-    --icon-size: 42px;
-    --margin-size: 8px;
-    --visual-width: calc(12 * (var(--icon-size) + var(--margin-size) * 2));
+    --anim-list: opacity 0.2s, border 0.2s, color 0.2s, fill 0.2s;
+    --size: 6px;
+    --unfocus: 0.5;
 }
 
 * {
@@ -19,75 +18,76 @@
     transition-timing-function: ease-out;
 }
 
-#main {
-    width: 100vw;
-    background-size: cover;
-    background-position: center;
-    overflow-x: hidden;
-    margin-top: calc(50vh - 1.5 * var(--icon-size) - 2 * var(--margin-size));
-}
-
-#qBox {
-    display: flex;
-    flex-direction: row;
-    color: #fff;
-    background: none;
-    padding: calc(2 * var(--margin-size));
-    font-size: calc(var(--icon-size) * 0.5);
-    line-height: calc(var(--icon-size) - var(--margin-size));
-    height: calc(var(--icon-size) - 4 * var(--margin-size));
-    width: calc(var(--visual-width) - var(--margin-size) * 2);
-    max-width: calc(100% - 134px);
+body {
     display: block;
-    margin: 0 auto var(--margin-size);
-    border: 2px solid #333;
-    border-radius: var(--icon-size);
-    text-align: left;
-}
-
-#qBox:focus {
-    border: 2px solid #888;
-}
-
-#secondary {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     margin: 0 auto;
-    width: var(--visual-width);
-    max-width: calc(100% - 116px);
+    width: 80vw;
+    max-width: 540px;
+    height: 100vh;
+    line-height: 100vh;
 }
 
-#secondary .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+#contain {
+    /* background: blue; */
+    display: inline-block;
+    line-height: 24px;
     width: 100%;
 }
 
-div.ico:hover {
+#contain * {
+    display: block;
+    margin: calc(var(--size) * 2) auto;
+}
+
+#qBox {
+    display: block;
+    width: calc(100% - 28px);
+    font-size: 18px;
+    color: #fff;
+    background: none;
+    padding: 6px 12px;
+    height: 24px;
+    border-radius: 24px;
+    line-height: 24px;
+    border: 2px solid #888;
+    color: #888;
+    text-align: left;
+    opacity: var(--unfocus);
+}
+
+#qBox:hover {
+    opacity: calc(var(--unfocus) * 0.5 + 0.5)
+}
+
+#qBox:focus {
     opacity: 1.0;
 }
 
-div.ico {
-    border-radius: 10%;
-    font-size: calc(var(--icon-size) - 2 *var(--margin-size));
-    line-height: var(--icon-size);
-    text-align: center;
-    flex-direction: row;
-    min-width: var(--icon-size);
-    min-height: var(--icon-size);
-    width: var(--icon-size);
-    height: var(--icon-size);
-    /* padding: 4.5px; */
-    margin: var(--margin-size);
-    background-position: center;
-    background-size: auto var(--icon-size);
-    background-repeat: no-repeat;
-    opacity: 0.7;
-    cursor: pointer;
+#options {
+    padding: 0px 4px;
 }
 
-img {
-    display: none;
+#options img {
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    margin: 0px 10px;
+    opacity: var(--unfocus);
+}
+
+#options img:hover {
+    opacity: 1;
+}
+
+#cog {
+    cursor: pointer;
+    fill: #888;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    opacity: var(--unfocus);
+}
+
+#cog:hover {
+    opacity: 1.0;
 }

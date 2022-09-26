@@ -1,11 +1,11 @@
 const searchers = {
-    "Brave": { s: "https://search.brave.com/search?q=%s", icon: "brave.svg" },
-    "Duckduckgo": { s: "https://duckduckgo.com/?q=%s", icon: "duck.svg" },
-    "Ecosia": { s: "https://www.ecosia.org/search?q=%s", icon: "ecosia.svg" },
-    "Bing": { s: "https://www.bing.com/search?q=%s", icon: "bing.svg" },
-    "Google": { s: "https://www.google.com/search?q=%s", icon: "google.svg" },
-    "Rumble": { s: "https://rumble.com/search/video?q=%s", icon: "rumble.svg" },
-    "Youtube": { s: "https://www.youtube.com/results?search_query=%s", icon: "youtube.svg" }
+    "Brave": { s: "https://search.brave.com/search?q=%s", icon: "img/brave.svg" },
+    "Duckduckgo": { s: "https://duckduckgo.com/?q=%s", icon: "img/duck.svg" },
+    "Ecosia": { s: "https://www.ecosia.org/search?q=%s", icon: "img/ecosia.svg" },
+    "Bing": { s: "https://www.bing.com/search?q=%s", icon: "img/bing.svg" },
+    "Google": { s: "https://www.google.com/search?q=%s", icon: "img/google.svg" },
+    "Rumble": { s: "https://rumble.com/search/video?q=%s", icon: "img/rumble.svg" },
+    "Youtube": { s: "https://www.youtube.com/results?search_query=%s", icon: "img/youtube.svg" }
 };
 
 const options = document.getElementById("options");
@@ -83,7 +83,7 @@ cog.onclick = () => {
 function applyStyles() {
     let bg = bgVal.value.replace("#", "0x");
     let ui = uiVal.value.replace("#", "0x");
-    window.open("../opentab/index.html?bg=" + bg + "&ui=" + ui, "_self");
+    window.open(window.location.pathname + "?bg=" + bg + "&ui=" + ui, "_self");
 }
 
 setColors;

@@ -10,10 +10,15 @@
     <section id="contain">
         <input type="text" id="qBox" title="Search" />
         <div id="options"></div>
-        <!-- <div id="settings">
-            <p>Settings</p>
-            <p>Option</p>
-        </div> -->
+
+        <div id="settings" style="opacity:0">
+            <h1>Settings</h1>
+            <p>Background</p>
+            <input id="bgVal" type="text"/>
+            <p>UI Color</p>
+            <input id="uiVal" type="text"/>
+            <button onclick="applyStyles()">Apply</button>
+        </div>
     </section>
     <svg id="cog" height="24" width="24">
         <path

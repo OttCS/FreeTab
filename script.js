@@ -25,20 +25,39 @@ refresh = true;
 const qBox = document.getElementById("qBox");
 const cog = document.getElementById("cog");
 
-const urlParam = new URLSearchParams(window.location.search);
-if (bg = urlParam.get("bg")) {
-    if (bg.indexOf("://") != -1) {
-        bg = "url(" + bg + ")";
+const colors = {}
+function parseColors() {
+    const urlParam = new URLSearchParams(window.location.search);
+    if (bg = urlParam.get("bg")) {
+        if (bg.indexOf("://") != -1) {
+            bg = "url(" + bg + ")";
+        } else {
+            if (bg.indexOf("0x") == 0) bg = "#" + bg.substring(2);
+        }
     } else {
-        if (bg.indexOf("0x") == 0) bg = "#" + bg.substring(2);
+        bg = "#000";
     }
-    document.documentElement.style.setProperty('--bg', bg);
-}
+    colors.bg = bg;
 
-if (ui = urlParam.get("ui")) {
-    if (ui.indexOf("0x") == 0) ui = "#" + ui.substring(2);
-    document.documentElement.style.setProperty('--ui', ui);
-}
+    if (ui = urlParam.get("ui")) {
+        if (ui.indexOf("0x") == 0) ui = "#" + ui.substring(2);
+    } else {
+        ui = "#fff";
+    }
+    colors.ui = ui;
+};
+parseColors();
+
+function setColors() {
+    if (colors.bg) document.documentElement.style.setProperty('--bg', colors.bg);
+    if (colors.ui) document.documentElement.style.setProperty('--ui', colors.ui);
+};
+setColors();
+
+const bgVal = document.getElementById("bgVal");
+bgVal.value = colors.bg;
+const uiVal = document.getElementById("uiVal");
+uiVal.value = colors.ui;
 
 const search = (sAddress) => {
     window.open(sAddress.replace("%s", qBox.value.replace(/[^a-z0-9_]+/gi, '+').replace(/^-|-$/g, '').toLowerCase()), "_self")
@@ -50,6 +69,21 @@ document.onkeydown = (e) => {
     }
 }
 
+const settings = document.getElementById("settings");
+settings.show = false;
 cog.onclick = () => {
-    alert('Settings:\nAdd a ? to the end of the URL, then add the following optional attributes (separated by &). Example: ?bg=0xgray&ui=0xf24\n\nAssign a web color name, or hex preceded by "0x" instead of "#"\nThis will set the color of the corresponding element(s).')
+    if (settings.show) {
+        settings.style.opacity = 0;
+    } else {
+        settings.style.opacity = 1;
+    }
+    settings.show ^= true;
 }
+
+function applyStyles() {
+    let bg = bgVal.value.replace("#", "0x");
+    let ui = uiVal.value.replace("#", "0x");
+    window.open("/?bg=" + bg + "&ui=" + ui, "_self");
+}
+
+setColors;

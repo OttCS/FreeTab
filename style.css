@@ -1,9 +1,9 @@
 :root {
-    --anim-list: opacity 0.2s, border 0.2s, color 0.2s, fill 0.2s;
+    --anim-list: opacity 0.2s, border 0.2s, color 0.2s, fill 0.2s, filter 0.2s;
     --size: 6px;
     --rnd: 24px;
-    --bg: #111;
-    --ui: #bbb;
+    --bg: #000;
+    --ui: #fff;
     --unfocus: 0.5;
 }
 
@@ -31,7 +31,6 @@ body {
 }
 
 #contain {
-    /* background: blue; */
     display: inline-block;
     line-height: 24px;
     width: 100%;
@@ -42,9 +41,7 @@ body {
     margin: calc(var(--size) * 2) auto;
 }
 
-#qBox {
-    display: block;
-    width: calc(100% - 28px);
+input {
     font-size: 18px;
     color: var(--ui);
     background: none;
@@ -53,16 +50,19 @@ body {
     border-radius: var(--rnd);
     line-height: 24px;
     border: 2px solid var(--ui);
-    color: var(--ui);
-    text-align: left;
     opacity: var(--unfocus);
 }
 
-#qBox:hover {
+#qBox {
+    display: block;
+    width: calc(100% - 28px);
+}
+
+input:hover {
     opacity: calc(var(--unfocus) * 0.5 + 0.5)
 }
 
-#qBox:focus {
+input:focus {
     opacity: 1.0;
 }
 
@@ -96,6 +96,7 @@ body {
 }
 
 #settings {
+    opacity: 0;
     width: calc(80vw - 24px);
     max-width: 516px;
     padding: 0px 12px;
@@ -107,4 +108,25 @@ body {
     border: 2px solid var(--ui);
     background: var(--bg);
     border-radius: var(--rnd);
+}
+#settings * {
+    display: block;
+    text-align: center;
+}
+
+button {
+    display: block;
+    font-size: 18px;
+    padding: 0px 12px;
+    height: 40px;
+    line-height: 100%;
+    border-radius: var(--rnd);
+    background: var(--ui);
+    color: var(--bg);
+    opacity: var(--unfocus);
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 1;
 }

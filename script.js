@@ -83,7 +83,7 @@ cog.onclick = () => {
 function applyStyles() {
     let bg = bgVal.value.replace("#", "0x");
     let ui = uiVal.value.replace("#", "0x");
-    window.open("../index.html?bg=" + bg + "&ui=" + ui, "_self");
+    window.open("../opentab/index.html?bg=" + bg + "&ui=" + ui, "_self");
 }
 
 setColors;

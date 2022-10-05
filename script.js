@@ -55,6 +55,14 @@ function setColors() {
 };
 setColors();
 
+const timeOut = document.getElementById('time');
+function startTime() {
+    let d = new Date();
+    let m = d.getMinutes();
+    timeOut.innerText = d.getHours() + ":" + (m < 10 ? "0": "") +  m;
+    setTimeout(startTime, 1000);
+}
+
 const bgVal = document.getElementById("bgVal");
 bgVal.value = colors.bg;
 const uiVal = document.getElementById("uiVal");
@@ -87,4 +95,4 @@ function applyStyles() {
     window.open(window.location.pathname + "?bg=" + bg + "&ui=" + ui, "_self");
 }
 
-setColors;
+startTime();

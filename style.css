@@ -18,6 +18,7 @@
     -o-transition: var(--anim-list);
     transition: var(--anim-list);
     transition-timing-function: ease-out;
+    color: var(--ui);
 }
 
 body {
@@ -34,6 +35,7 @@ body {
     display: inline-block;
     line-height: 24px;
     width: 100%;
+    text-align: center;
 }
 
 #contain * {
@@ -128,5 +130,17 @@ button {
 }
 
 button:hover {
+    opacity: 1;
+}
+
+#time {
+    display: inline-block;
+    opacity: var(--unfocus);
+    font-size: 24px;
+    cursor: default;
+    font-weight: 600;
+}
+
+#time:hover {
     opacity: 1;
 }

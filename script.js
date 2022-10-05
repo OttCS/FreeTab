@@ -5,7 +5,8 @@ const searchers = {
     "Bing": { s: "https://www.bing.com/search?q=%s", icon: "img/bing.svg" },
     "Google": { s: "https://www.google.com/search?q=%s", icon: "img/google.svg" },
     "Rumble": { s: "https://rumble.com/search/video?q=%s", icon: "img/rumble.svg" },
-    "Youtube": { s: "https://www.youtube.com/results?search_query=%s", icon: "img/youtube.svg" }
+    "Youtube": { s: "https://www.youtube.com/results?search_query=%s", icon: "img/youtube.svg" },
+    "Github": { s: "https://github.com/search?q=%s", icon: "img/github.svg" }
 };
 
 const options = document.getElementById("options");

@@ -138,7 +138,6 @@ button:hover {
     opacity: var(--unfocus);
     font-size: 24px;
     cursor: default;
-    font-weight: 600;
 }
 
 #time:hover {

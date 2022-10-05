@@ -60,7 +60,8 @@ function startTime() {
     let d = new Date();
     let m = d.getMinutes();
     timeOut.innerText = d.getHours() + ":" + (m < 10 ? "0": "") +  m;
-    setTimeout(startTime, 1000);
+    s = 60000 - d.getSeconds() * 1000 - d.getMilliseconds();
+    setTimeout(startTime, s);
 }
 
 const bgVal = document.getElementById("bgVal");

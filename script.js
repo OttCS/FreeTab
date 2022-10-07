@@ -59,7 +59,8 @@ const timeOut = document.getElementById('time');
 function startTime() {
     let d = new Date();
     let m = d.getMinutes();
-    timeOut.innerText = d.getHours() + ":" + (m < 10 ? "0": "") +  m;
+    let h = d.getHours() % 12;
+    timeOut.innerText = (h + (h == 0) * 12) + ":" + (m < 10 ? "0": "") +  m;
     s = 60000 - d.getSeconds() * 1000 - d.getMilliseconds();
     setTimeout(startTime, s);
 }

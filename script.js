@@ -98,3 +98,4 @@ function applyStyles() {
 }
 
 startTime();
+qBox.focus();

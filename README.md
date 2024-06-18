@@ -9,4 +9,4 @@ Just a side project of mine, just an example of what browsers should strive for 
 3. Fast: No tracking, no indexing of pages, just search and you're on your way.
 
 ## How to Use
-**Chromium-Based** Go to <a href="chrome://flags/#custom-ntp">chrome://flags/#custom-ntp</a> and set the address to OpenTab's url (after customizing colors, if desired).
+**Chromium-Based** Go to `chrome://flags/#custom-ntp` and set the address to OpenTab's url (after customizing colors, if desired).
